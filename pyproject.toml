@@ -1,6 +1,6 @@
 [project]
 name = "dj-lite"
-version = "0.1.0"
+version = "1.0.0"
 description = "Configure SQLite for production use with Django."
 readme = "README.md"
 requires-python = ">=3.9.7"
