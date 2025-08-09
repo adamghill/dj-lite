@@ -1,5 +1,5 @@
 from typeguard import typechecked
-from typing import Optional
+from typing import Optional, Any
 from pathlib import Path
 from dj_lite.enums import Synchronous, TempStore, JournalMode, TransactionMode
 
@@ -19,7 +19,7 @@ def sqlite_config(
     mmap_size: int = 134217728,
     journal_size_limit: int = 27103364,
     cache_size: int = 2000,
-    pragmas: Optional[dict] = None,
+    pragmas: Optional[dict[str, Any]] = None,
 ):
     """Generate a Django database configuration dictionary for SQLite. It provides sensible defaults
     while allowing customization of key SQLite parameters.
