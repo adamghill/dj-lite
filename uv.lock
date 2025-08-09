@@ -2,6 +2,9 @@ version = 1
 revision = 1
 requires-python = ">=3.9.7"
 
+[manifest]
+constraints = [{ name = "django", specifier = ">=5.1" }]
+
 [[package]]
 name = "colorama"
 version = "0.4.6"
@@ -25,7 +28,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "typeguard", specifier = ">=4.4.4" }]
+requires-dist = [{ name = "typeguard", specifier = ">=2" }]
 
 [package.metadata.requires-dev]
 dev = [{ name = "pytest", specifier = ">=8.4.1" }]
