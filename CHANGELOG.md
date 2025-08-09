@@ -3,8 +3,9 @@
 ## 1.0.0
 
 - Add kwargs for all default pragmas.
-- Allow overriding default pragmas.
-- Substantial update to readme.
+- Allow adding additional pragmas if needed.
+- Substantial updates to the readme.
+- Add `temp_store=MEMORY` pragma by default.
 
 ## 0.1.0
 
