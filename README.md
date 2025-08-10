@@ -1,4 +1,4 @@
-# dj-lite
+# dj-lite 💡
 
 >Use SQLite in production with Django
 
