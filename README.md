@@ -27,7 +27,7 @@ uv add dj-lite
 ```python
 # settings.py
 
-import dj_lite import sqlite_config
+from dj_lite import sqlite_config
 
 DATABASES = {
   "default": sqlite_config(BASE_DIR),
