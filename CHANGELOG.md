@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+- Update readme.
+
 ## 1.1.0
 
 - Add GitHub Action publish.
