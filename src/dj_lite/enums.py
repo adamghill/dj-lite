@@ -1,4 +1,17 @@
-from enum import StrEnum
+try:
+    from enum import StrEnum
+except ImportError:
+    from enum import Enum
+
+    class StrEnum(str, Enum):
+        def _generate_next_value_(name, *args, **kwargs):  # noqa: ARG002, N805
+            return name.lower()
+
+        def __str__(self):
+            return self.value
+
+        def __repr__(self):
+            return f"{self.__class__.__name__}.{self.name}"
 
 
 class TransactionMode(StrEnum):

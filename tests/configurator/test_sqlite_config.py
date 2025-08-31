@@ -1,15 +1,16 @@
+from copy import deepcopy
+from pathlib import Path
+
 import pytest
 from typeguard import TypeCheckError
+
 from dj_lite import (
-    sqlite_config,
-    TransactionMode,
+    SQLITE_INIT_COMMAND,
     JournalMode,
     Synchronous,
-    SQLITE_INIT_COMMAND,
+    TransactionMode,
+    sqlite_config,
 )
-from pathlib import Path
-from copy import deepcopy
-
 
 default = {
     "ENGINE": "django.db.backends.sqlite3",
@@ -147,10 +148,7 @@ def test_incorrect_type():
     with pytest.raises(TypeCheckError) as e:
         sqlite_config(Path("."), journal_size_limit="ohno")
 
-    assert (
-        e.exconly()
-        == 'typeguard.TypeCheckError: argument "journal_size_limit" (str) is not an instance of int'
-    )
+    assert e.exconly() == 'typeguard.TypeCheckError: argument "journal_size_limit" (str) is not an instance of int'
 
 
 def test_extra_kwargs():

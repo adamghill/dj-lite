@@ -1,6 +1,5 @@
 from dj_lite.configurator import sqlite_config
-from dj_lite.enums import Synchronous, TempStore, JournalMode, TransactionMode
-
+from dj_lite.enums import JournalMode, Synchronous, TempStore, TransactionMode
 
 SQLITE_INIT_COMMAND = """PRAGMA journal_mode=WAL;
 PRAGMA synchronous=NORMAL;
@@ -12,10 +11,10 @@ PRAGMA cache_size=2000;
 
 
 __all__ = [
-    sqlite_config,
-    SQLITE_INIT_COMMAND,
-    Synchronous,
-    TempStore,
-    JournalMode,
-    TransactionMode,
+    "SQLITE_INIT_COMMAND",
+    "JournalMode",
+    "Synchronous",
+    "TempStore",
+    "TransactionMode",
+    "sqlite_config",
 ]
