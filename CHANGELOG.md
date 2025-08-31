@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+- Add GitHub Action publish.
+
 ## 1.0.0
 
 - Add kwargs for all default pragmas.
