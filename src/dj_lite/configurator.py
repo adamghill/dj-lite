@@ -1,9 +1,22 @@
+import logging
 from pathlib import Path
 from typing import Any
 
 from typeguard import typechecked
 
 from dj_lite.enums import JournalMode, Synchronous, TempStore, TransactionMode
+
+logger = logging.getLogger(__name__)
+
+
+def warn_on_invalid_enum(enum_cls, text: str) -> None:
+    """Log a warning if an attribute is used for an enum and it is not valid."""
+
+    try:
+        enum_cls(text.upper()) if isinstance(text, str) else text
+    except ValueError:
+        valid_modes = ", ".join(f"'{mode.value}'" for mode in enum_cls)
+        logger.warning(f"Invalid attribute: '{enum_cls.__name__}.{text}'. Must be one of: {valid_modes}")
 
 
 @typechecked
@@ -12,12 +25,12 @@ def sqlite_config(
     *,
     file_name: str = "db.sqlite3",
     engine: str = "django.db.backends.sqlite3",
-    transaction_mode: TransactionMode = TransactionMode.IMMEDIATE,
+    transaction_mode: TransactionMode | str = TransactionMode.IMMEDIATE,
     timeout: int = 5,
     init_command: str | None = None,
-    journal_mode: JournalMode = JournalMode.WAL,
-    synchronous: Synchronous = Synchronous.NORMAL,
-    temp_store: TempStore = TempStore.MEMORY,
+    journal_mode: JournalMode | str = JournalMode.WAL,
+    synchronous: Synchronous | str = Synchronous.NORMAL,
+    temp_store: TempStore | str = TempStore.MEMORY,
     mmap_size: int = 134217728,
     journal_size_limit: int = 27103364,
     cache_size: int = 2000,
@@ -60,6 +73,11 @@ def sqlite_config(
         }
         ```
     """
+
+    warn_on_invalid_enum(TransactionMode, transaction_mode)
+    warn_on_invalid_enum(JournalMode, journal_mode)
+    warn_on_invalid_enum(Synchronous, synchronous)
+    warn_on_invalid_enum(TempStore, temp_store)
 
     if pragmas is None:
         pragmas = {}

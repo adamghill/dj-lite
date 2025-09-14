@@ -1,9 +1,9 @@
 try:
-    from enum import StrEnum
+    from enum import StrEnum  # type: ignore[attr-defined]
 except ImportError:
     from enum import Enum
 
-    class StrEnum(str, Enum):
+    class StrEnum(str, Enum):  # type: ignore[no-redef]
         def _generate_next_value_(name, *args, **kwargs):  # noqa: ARG002, N805
             return name.lower()
 

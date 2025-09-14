@@ -11,6 +11,7 @@ from dj_lite import (
     TransactionMode,
     sqlite_config,
 )
+from dj_lite.enums import TempStore
 
 default = {
     "ENGINE": "django.db.backends.sqlite3",
@@ -67,6 +68,13 @@ def test_transaction_mode_exclusive():
     assert actual == expected
 
 
+def test_invalid_transaction_mode(caplog):
+    sqlite_config(Path("."), transaction_mode="fake-transaction-mode")
+
+    assert 1 == len(caplog.records)
+    assert "Invalid attribute: 'TransactionMode.fake-transaction-mode'" in caplog.records[0].message
+
+
 def test_timeout():
     expected = deepcopy(default)
     expected["OPTIONS"]["timeout"] = 30
@@ -111,6 +119,13 @@ def test_journal_mode():
     assert actual == expected
 
 
+def test_invalid_journal_mode(caplog):
+    sqlite_config(Path("."), journal_mode="fake-journal-mode")
+
+    assert 1 == len(caplog.records)
+    assert "Invalid attribute: 'JournalMode.fake-journal-mode'" in caplog.records[0].message
+
+
 def test_synchronous():
     expected = deepcopy(default)
     expected["OPTIONS"]["init_command"] = expected["OPTIONS"]["init_command"].replace(
@@ -120,6 +135,31 @@ def test_synchronous():
     actual = sqlite_config(Path("."), synchronous=Synchronous.FULL)
 
     assert actual == expected
+
+
+def test_invalid_synchronous(caplog):
+    sqlite_config(Path("."), synchronous="fake-synchronous")
+
+    assert 1 == len(caplog.records)
+    assert "Invalid attribute: 'Synchronous.fake-synchronous'" in caplog.records[0].message
+
+
+def test_temp_store():
+    expected = deepcopy(default)
+    expected["OPTIONS"]["init_command"] = expected["OPTIONS"]["init_command"].replace(
+        "PRAGMA temp_store=MEMORY;", "PRAGMA temp_store=FILE;"
+    )
+
+    actual = sqlite_config(Path("."), temp_store=TempStore.FILE)
+
+    assert actual == expected
+
+
+def test_invalid_temp_store(caplog):
+    sqlite_config(Path("."), temp_store="fake-temp-store")
+
+    assert 1 == len(caplog.records)
+    assert "Invalid attribute: 'TempStore.fake-temp-store'" in caplog.records[0].message
 
 
 def test_mmap_size():
