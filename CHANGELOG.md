@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0
+
+- Log warning when an invalid enum attribute is used.
+- Fix type errors.
+
 ## 1.2.0
 
 - Update readme.
