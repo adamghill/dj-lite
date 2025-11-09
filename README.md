@@ -4,11 +4,13 @@
 
 ## Overview
 
-Simplify deploying and maintaining production Django websites by using SQLite in production. `dj-lite` helps enable the best performance for SQLite for small to medium-sized projects. It requires Django 5.1+.
+Simplify deploying and maintaining production Django websites by using SQLite in production. `dj-lite` helps enable the best performance for SQLite for small to medium-sized projects.
 
-I also wrote the [definitive guide to using Django SQLite in production](https://alldjango.com/articles/definitive-guide-to-using-django-sqlite-in-production) which has more details about the actual server setup and operations.
+`dj-lite` requires Django 5.1+ because it utilizes the `init_command` and `transaction_mode` [configuration options](https://docs.djangoproject.com/en/5.2/releases/5.1/#database-backends).
 
-Also read through the [official Django SQLite notes](https://docs.djangoproject.com/en/stable/ref/databases/#sqlite-notes) for more low-level information.
+I wrote a [definitive guide to using Django SQLite in production](https://alldjango.com/articles/definitive-guide-to-using-django-sqlite-in-production) which has more details about the actual server setup and operations. It covers [Litestream](https://litestream.io/), deployments, Docker settings, and more.
+
+Also read through the [official Django SQLite notes](https://docs.djangoproject.com/en/stable/ref/databases/#sqlite-notes) for additional low-level information.
 
 ## Installation
 
