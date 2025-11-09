@@ -41,7 +41,7 @@ DATABASES = {
 ```python
 {
     "ENGINE": "django.db.backends.sqlite3",
-    "NAME": Path("db.sqlite3"),
+    "NAME": base_dir / Path("db.sqlite3"),
     "OPTIONS": {
         "transaction_mode": "IMMEDIATE",
         "timeout": 5,
@@ -65,49 +65,49 @@ The directory where the database file will be stored. Required.
 
 ### file_name: `str`
 
-Name of the SQLite database file. Defaults to 'db.sqlite3'.
+Name of the SQLite database file. Defaults to `"db.sqlite3"`.
 
 ### engine: `str`
 
-Django database backend to use. Defaults to 'django.db.backends.sqlite3'.
+Django database backend to use. Defaults to `"django.db.backends.sqlite3"`.
 
 ### transaction_mode: `TransactionMode`
 
-The transaction locking behavior. Defaults to 'IMMEDIATE'.
+The transaction locking behavior. Defaults to `TransactionMode.IMMEDIATE`.
 
 ### timeout: `int`
 
-Time in seconds to wait for a database lock before raising an error. Defaults to 5.
+Time in seconds to wait for a database lock before raising an error. Defaults to `5`.
 
-### init_command: `str`
+### init_command: `str` | None
 
 Custom SQL command to execute when the database connection is created. If `None`, will be generated from other parameters.
 
 ### journal_mode: `JournalMode`
 
-The journal mode for the database. Defaults to 'WAL'.
+The journal mode for the database. Defaults to `JournalMode.WAL`.
 
 ### synchronous: `Synchronous`
 
-How aggressively SQLite syncs data to disk. Defaults to 'NORMAL'.
+How aggressively SQLite syncs data to disk. Defaults to `Synchronous.NORMAL`.
 
 ### temp_store: `TempStore`
 
-How to store temporary objects. Defaults to 'MEMORY'.
+How to store temporary objects. Defaults to `TempStore.MEMORY`.
 
 ### mmap_size: `int`
 
-Maximum number of bytes to use for memory-mapped I/O. Defaults to 134217728.
+Maximum number of bytes to use for memory-mapped I/O. Defaults to `134217728`.
 
 ### journal_size_limit: `int`
 
-Maximum size of the journal in bytes. Defaults to 27103364.
+Maximum size of the journal in bytes. Defaults to `27103364`.
 
 ### cache_size: `int`
 
-Maximum number of database disk pages to hold in memory. Defaults to 2000.
+Maximum number of database disk pages to hold in memory. Defaults to `2000`.
 
-### pragmas: `dict`
+### pragmas: `dict` | `None`
 
 Additional PRAGMA statements to include in the init command. These will override any conflicting settings from other parameters.
 
